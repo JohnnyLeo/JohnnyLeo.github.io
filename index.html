@@ -58,7 +58,7 @@
 </script>
 <script>
 
-    var str = '姓名:刘建永<br\>性别:男<br\>年龄:21<br\><br\>通过导航栏查看更多信息...';
+    var str = '姓名:刘建永<br\>性别:男<br\>年龄:21<br\><br\>通过导航栏查看更多信息..';
     var i = 0;
     var flag = true;
 
@@ -78,7 +78,10 @@
             setTimeout('typing()', 600);
         }
     }
-    layer.close(loading);
-    typing();
+    window.onload = function() {
+        layer.close(loading);
+        typing();
+    }
+
 </script>
 </html>
