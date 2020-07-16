@@ -6,6 +6,20 @@
     <link rel="stylesheet" type="text/css" href="js/layui/css/layui.css"/>
     <title>JohnnyLeo的个人主页</title>
 </head>
+<script>
+    layui.use('layer', function(){
+        var loading = layui.layer.load(0, {
+            shade: true
+        });
+
+        window.onload = function() {
+            layui.layer.close(loading);
+            typing();
+        }
+
+    });
+
+</script>
 <style>
     #text {
         position: absolute;
@@ -56,16 +70,17 @@
     });
 </script>
 <script>
+
     var str = '姓名:刘建永<br\>性别:男<br\>年龄:21<br\><br\>通过导航栏查看更多信息...';
     var i = 0;
     var flag = true;
-    function typing(){
+
+    function typing() {
         var divTyping = document.getElementById('text');
         if (i <= str.length) {
             divTyping.innerHTML = str.slice(0, i++) + '_';
             setTimeout('typing()', 200);//递归调用
-        }
-        else{
+        } else {
             if (flag) {
                 divTyping.innerHTML = str;
                 flag = false;
@@ -76,7 +91,5 @@
             setTimeout('typing()', 600);
         }
     }
-
-    typing();
 </script>
 </html>
