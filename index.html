@@ -2,9 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="js/layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="js/layui/css/layui.css"/>
     <title>JohnnyLeo的个人主页</title>
 </head>
+<style>
+    #text {
+        position: absolute;
+        width: 400px;
+        left: 50%;
+        margin-left: -200px;
+        top: 50%;
+        margin-top: -150px;
+        font-size: 30px;
+        color: white;
+    }
+    #img {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+</style>
 <body>
-网页正在开发中...
+<img id="img" src="img/bac.png"/>
+<ul class="layui-nav">
+    <li class="layui-nav-item layui-this"><a href="index.html">主页</a></li>
+    <li class="layui-nav-item">
+        <a href="javascript:;">项目</a>
+        <dl class="layui-nav-child">
+            <dd><a href="air.html">机票元搜索及智能推荐系统</a></dd>
+            <dd><a href="wugu.html">手机销售网站</a></dd>
+            <dd><a href="supermarket.html">超市管理系统</a></dd>
+            <dd><a href="salmon.html">记账本（安卓APP）</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item"><a href="school.html">校园经历</a></li>
+    <li class="layui-nav-item">
+        <a href="javascript:;">技术栈</a>
+    </li>
+    <li class="layui-nav-item"><a href="">更多信息</a></li>
+</ul>
+
+<!--主内容-->
+<div>
+    <div id="text"></div>
+</div>
+
+
 </body>
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+</script>
+<script>
+    var str = '姓名:刘建永<br\>性别:男<br\>年龄:21<br\><br\>通过导航栏查看更多信息...';
+    var i = 0;
+    var flag = true;
+    function typing(){
+        var divTyping = document.getElementById('text');
+        if (i <= str.length) {
+            divTyping.innerHTML = str.slice(0, i++) + '_';
+            setTimeout('typing()', 200);//递归调用
+        }
+        else{
+            if (flag) {
+                divTyping.innerHTML = str;
+                flag = false;
+            } else {
+                divTyping.innerHTML = str + '_';
+                flag = true;
+            }
+            setTimeout('typing()', 600);
+        }
+    }
+
+    typing();
+</script>
 </html>
