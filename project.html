@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="js/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <script src="js/global.js"></script>
+    <title>项目经历</title>
+</head>
+<style>
+    #carousel {
+        left: 50%;
+        margin-left: -389px;
+    }
+    #text {
+        position: absolute;
+        margin-top: 20px;
+        width: 778px;
+        left: 50%;
+        margin-left: -389px;
+        font-size: 20px;
+        color: white;
+    }
+    #btn {
+        position: absolute;
+        left: 50%;
+        margin-left: -45px;
+        margin-top: 230px;
+        visibility: hidden;
+    }
+    .img {
+        height: 100%;
+        width: 100%;
+    }
+</style>
+<body style="background: url('img/bac.png') fixed">
+<ul class="layui-nav">
+    <li class="layui-nav-item"><a href="index.html">主页</a></li>
+    <li class="layui-nav-item layui-this">
+        <a href="javascript:;">项目</a>
+        <dl class="layui-nav-child">
+            <dd><a href="project.html?pro=air">机票元搜索及智能推荐系统</a></dd>
+            <dd><a href="project.html?pro=wugu">手机销售网站</a></dd>
+            <dd><a href="project.html?pro=supermarket">超市管理系统</a></dd>
+            <dd><a href="project.html?pro=salmon">记账本（安卓APP）</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item"><a href="school.html">校园经历</a></li>
+    <li class="layui-nav-item"><a href="tec.html">技术栈</a></li>
+    <li class="layui-nav-item"><a href="more.html">更多信息</a></li>
+</ul>
+
+<!--主体内容部分-->
+<div>
+    <div class="layui-carousel" id="carousel">
+        <div carousel-item="">
+            <div><img class="img" alt="i1" src="img/bac.png"></div>
+            <div><img class="img" alt="i2" src="img/bac.png"></div>
+            <div><img class="img" alt="i3" src="img/bac.png"></div>
+        </div>
+    </div>
+
+    <div id="text"></div>
+    <div id="btn"><button onclick="goto()" type="button" class="layui-btn layui-btn-primary layui-btn-radius">查看项目</button></div>
+</div>
+</body>
+<script>
+    layui.use('carousel', function() {
+        var carousel = layui.carousel;
+        carousel.render({
+            elem: '#carousel'
+            ,width: '778px'
+            ,height: '440px'
+            ,interval: 5000
+        });
+    })
+</script>
+<script>
+    var reg = new RegExp("(^|&)" + "pro" + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    var pro = unescape(r[2]); //返回参数值
+
+    var air_text = '实习公司:成都上程数据有限公司<br/>' +
+        '项目名称:机票元搜索及智能推荐系统<br/>' +
+        '主要职责:负责 hadoop 集群的搭建。<br/>' +
+        '负责部分 hive SQL 的编写，实现数据的统计、管理、更新等。<br/>' +
+        '负责使用 spark SQL 编写程序，实现数据计算与航程拼接。<br/>' +
+        '负责使用 spark MLlib 机器学习库实现航班智能排序。';
+    var wugu_text = '项目名称:五谷商城--手机销售网站<br/>' +
+        '主要职责:负责项目的架构搭建，使用Spring Cloud技术栈的框架构建微服务系统，使用git进行版本控制。<br/>' +
+        '负责登录模块，通过检测用户状态，实现访问拦截，引导用户进入登录入口。<br/>' +
+        '负责购物车模块，保存用户喜爱的商品。';
+    var supermarket_text = '项目名称:超市管理系统<br/>' +
+        '主要职责:负责项目搭建，选用Spring boot框架达到快速开发目的、使用mybatis做数据映射、使用git做版本控制。<br/>' +
+        '负责商品管理模块后端开发，为用户显示该用户权限以内的商品信息。<br/>' +
+        '负责项目前端开发，使用layui搭建前端框架，使用vue实现数据的动态绑定与加载。<br/>' +
+        '负责用户行为图形化分析，使用echarts来显示统计的数据，方便用户查看行为比例、以及最近行为信息。';
+    var salmon_text = '项目名称:salmon记账本（安卓app）<br/>' +
+        '项目简介:salmon记账本是一款简单快速方便的记账本app。<br/>' +
+        '它支持语音智能识别分类记账，支持按多种类别快速查账，以及统计账目信息。<br/>' +
+        '它支持以图形化界面查看账目，直观明了，走势一目了然。<br/>' +
+        '它支持设置月目标，智能预警，超额提醒等功能。';
+
+    var air_url = "https://github.com/JohnnyLeo/air-ticket";
+    var wugu_url = "https://github.com/JohnnyLeo/wugu-store";
+    var supermarket_url = "https://github.com/JohnnyLeo/supermarket";
+    var salmon_url = "https://github.com/JohnnyLeo/Salmon-Account-Book";
+
+    var img_src = pro;
+    var str;
+    var url;
+    switch (pro) {
+        case "air":str = air_text;url = air_url;break;
+        case "wugu": str = wugu_text;url = wugu_url;break;
+        case "supermarket": str = supermarket_text;url = supermarket_url;break;
+        case "salmon": str = salmon_text;url = salmon_url;break;
+    }
+    var imgs = document.getElementsByClassName("img");
+    for (img of imgs) {
+        console.log("123")
+        img.src = "img/" + img_src + "/" + img.alt + ".png"
+    }
+
+    var i = 0;
+    var flag = true;
+    var btn = false;
+
+    function typing() {
+        var divTyping = document.getElementById('text');
+        if (i <= str.length) {
+            divTyping.innerHTML = str.slice(0, i++) + '_';
+            setTimeout('typing()', 50);//递归调用
+        } else {
+            if (flag) {
+                divTyping.innerHTML = str;
+                flag = false;
+            } else {
+                divTyping.innerHTML = str + '_';
+                flag = true;
+            }
+            setTimeout('typing()', 600);
+            if (!btn) {
+                change();
+                btn = true;
+            }
+        }
+    }
+
+    function change() {
+        document.getElementById("btn").style.visibility = "visible";
+    }
+
+    function goto() {
+        window.open(url);
+    }
+
+    typing();
+</script>
+</html>
